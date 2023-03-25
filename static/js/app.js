@@ -37,23 +37,31 @@ function demo(selectedValue) {
     d3.json(url).then((data) => {
         console.log(`Data: ${data}`);
 
-        // An array of metadata objects (dicts)
+        // An array of metadata objects
         let metadata = data.metadata;
         
-        // Filter data where id = selected value 
+        // Filter data where id = selected value after converting their types 
+        // (bc meta.id is in integer format and selectValue from is in string format)
         let filteredData = metadata.filter((meta) => meta.id == selectedValue);
       
-        // Assign the first object (dictionary) to the obj variable 
+        // Assign the first object to obj variable
         let obj = filteredData[0]
         
-        // Clear the childs in div with id sample-metadata
+        // Clear the child elements in div with id sample-metadata
         d3.select("#sample-metadata").html("");
   
-        // Append each key-value pair to the demographics panel
-        // This is adding each pair as a h5 child element to the div with id sample-metadata
-        Object.entries(obj).forEach(([key,value]) => {
+        // Object.entries() is a built-in method in JavaScript 
+        // This returns an array of a given object's own enumerable property [key, value]
+        let entries = Object.entries(obj);
+        
+        // Iterate through the entries array
+        // Add a h5 child element for each key-value pair to the div with id sample-metadata
+        entries.forEach(([key,value]) => {
             d3.select("#sample-metadata").append("h5").text(`${key}: ${value}`);
         });
+
+        // Log the entries Array
+        console.log(entries);
     });
   };
   
@@ -64,16 +72,16 @@ function bar(selectedValue) {
     d3.json(url).then((data) => {
         console.log(`Data: ${data}`);
 
-        // An array of sample objects (dicts)
+        // An array of sample objects
         let samples = data.samples;
 
         // Filter data where id = selected value 
         let filteredData = samples.filter((sample) => sample.id === selectedValue);
 
-        // Assign the first object (dictionary) to the obj variable 
+        // Assign the first object to obj variable
         let obj = filteredData[0];
         
-        //  Trace for the data for the horizontal bar chart
+        // Trace for the data for the horizontal bar chart
         let trace = [{
             // Slice the top 10 otus
             x: obj.sample_values.slice(0,10).reverse(),
@@ -90,14 +98,16 @@ function bar(selectedValue) {
   
 // Make the bubble chart
 function bubble(selectedValue) {
+    // Fetch the JSON data and console log it
     d3.json(url).then((data) => {
-        // Retrieve all sample data
+
+        // An array of sample objects
         let samples = data.samples;
     
-        // Filter based on the value of the sample
+        // Filter data where id = selected value 
         let filteredData = samples.filter((sample) => sample.id === selectedValue);
     
-        // Assign the first object (dictionary) to the obj variable 
+        // Assign the first object to obj variable
         let obj = filteredData[0];
         
         // Trace for the data for the bubble chart
@@ -118,12 +128,12 @@ function bubble(selectedValue) {
             xaxis: {title: "OTU ID"}
         };
     
-        // Call Plotly to plot the data in a bubble chart
+        // Use Plotly to plot the data in a bubble chart
         Plotly.newPlot("bubble", trace, layout);
     });
 }
 
-// Update plots when option changed
+// Toggle to new plots when option changed
 function optionChanged(selectedValue) {
     demo(selectedValue);
     bar(selectedValue);
