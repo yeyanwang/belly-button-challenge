@@ -151,7 +151,7 @@ function gauge(selectedValue) {
         // Assign the first object to obj variable
         let obj = filteredData[0]
 
-        // Trace for the data for the bubble chart
+        // Trace for the data for the gauge chart
         let trace = [{
             domain: { x: [0, 1], y: [0, 1] },
             value: obj.wfreq,
