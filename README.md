@@ -1,12 +1,12 @@
 # Belly Button Biodiversity
 
-### Descripton
+## Descripton
 
 This is an interactive dashboard to explore the [Belly Button Biodiversity dataset](https://github.com/yeyanwang/belly-button-challenge/blob/main/data/samples.json) (you can also locate it in `data/samples.json`), which catalogs the microbes that colonize human navels.
 
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
-### Dashboard Features
+## Dashboard Features
 
   **Drop Down Menu**
   - Select the Test Subject ID No. with the drop down menu to toggle the visualizations (bar, gauge, bubble charts)
@@ -40,7 +40,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 
   ![image](https://user-images.githubusercontent.com/120543690/228077023-f328f606-b61c-4a6a-b3f8-01f1c5d9d189.png)
 
-### Credits
+## Credits
 - Plotly
 - D3 Library
 - North Carolina State University - The Public Science Lab
